@@ -127,8 +127,8 @@ class MainActivity : AppCompatActivity(), IView {
         val inflater = LayoutInflater.from(this)
 
         val binding = DataBindingUtil.inflate<DialogErrorBinding>(
-                inflater, R.layout.dialog_error,
-                null, false
+            inflater, R.layout.dialog_error,
+            null, false
         )
 
         binding.listener = mPresenter
@@ -141,8 +141,8 @@ class MainActivity : AppCompatActivity(), IView {
         val inflater = LayoutInflater.from(this)
 
         val binding = DataBindingUtil.inflate<DialogNewsDescriptionBinding>(
-                inflater, R.layout.dialog_news_description,
-                null, false
+            inflater, R.layout.dialog_news_description,
+            null, false
         )
 
         binding.model = item
@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity(), IView {
     }
 
     override fun closeDialog() {
-        if (dialog.isShowing())
+        if (dialog != null && dialog.isShowing())
             dialog.dismiss()
     }
 
@@ -215,13 +215,13 @@ class MainActivity : AppCompatActivity(), IView {
             loadingProcess.visibility = View.VISIBLE
 
             val options = RequestOptions()
-                    .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
 
             Glide.with(loadingProcess)
-                    .load(R.raw.waiting_icon)
-                    .apply(options)
-                    .into(loadingProcess);
+                .load(R.raw.waiting_icon)
+                .apply(options)
+                .into(loadingProcess);
         } else {
             loadingProcess.visibility = View.GONE
         }
