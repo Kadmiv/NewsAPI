@@ -35,7 +35,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 interface IView {
-
     fun showTopNews(news: List<Article>)
     fun openSeparateNews(item: Article)
     fun showMoreDetails(item: Article)
@@ -110,13 +109,11 @@ class MainActivity : AppCompatActivity(), IView {
         super.onSaveInstanceState(outState)
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         mPresenter?.onDestroy()
         mPresenter = null
     }
-
 
     //Check internet connection
     override fun hasConnection(): Boolean {
