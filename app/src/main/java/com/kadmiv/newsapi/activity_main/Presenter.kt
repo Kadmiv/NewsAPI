@@ -35,6 +35,7 @@ class Presenter(var mView: IView?) : ItemListener<Article>, Repo.RepoListener {
     //######################################
 
     override fun onItemClicked(item: Article) {
+        mView?.closeDialog()
         mView?.openSeparateNews(item)
     }
 

@@ -23,16 +23,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true">
 
-
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:onClick="@{()-> listener.onItemClicked(model)}">
 
                 <ImageView
                     android:id="@+id/news_image"

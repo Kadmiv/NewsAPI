@@ -11,12 +11,17 @@ class UniversalDialog : DialogFragment() {
 
 
     lateinit var doOnCancel: () -> Unit
+    lateinit var alertDialog: AlertDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        return AlertDialog.Builder(activity!!)
+        alertDialog = AlertDialog.Builder(activity!!)
                 .setView(binding.root)
                 .create()
+        return alertDialog
+    }
+
+    fun isShowing(): Boolean {
+        return alertDialog.isShowing
     }
 
     companion object Builder {
@@ -27,4 +32,5 @@ class UniversalDialog : DialogFragment() {
         doOnCancel()
         super.onCancel(dialog)
     }
+
 }
