@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity(), IView {
         showDialog(binding, true) { }
     }
 
-    private lateinit var dialog: UniversalDialog
+    private var dialog: UniversalDialog? = null
 
     private fun showDialog(binding: ViewDataBinding, isCancelable: Boolean, doOnCancel: () -> Unit) {
         UniversalDialog.binding = binding
@@ -164,14 +164,14 @@ class MainActivity : AppCompatActivity(), IView {
         }
         fManager.addToBackStack(null)
 
-        dialog.isCancelable = isCancelable
-        dialog.doOnCancel = doOnCancel
-        dialog.show(fManager, "new_purchase_dialog")
+        dialog!!.isCancelable = isCancelable
+        dialog!!.doOnCancel = doOnCancel
+        dialog!!.show(fManager, "new_purchase_dialog")
     }
 
     override fun closeDialog() {
-        if (dialog != null && dialog.isShowing())
-            dialog.dismiss()
+        if (dialog != null && dialog!!.isShowing())
+            dialog!!.dismiss()
     }
 
     override fun showTopNews(data: List<Article>) {
