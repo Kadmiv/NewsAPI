@@ -14,10 +14,12 @@ class Presenter(var mView: IView?) : ItemListener<Article>, Repo.RepoListener {
 
     fun onStart() {
         mRepo?.listener = this
-        if (oldList == null)
+        if (oldList == null) {
             getLastNews()
-        else {
+        } else {
             catchNews(oldList!!)
+            if (currentItem != null)
+                mView?.showMoreDetails(currentItem!!)
         }
     }
 
@@ -39,8 +41,10 @@ class Presenter(var mView: IView?) : ItemListener<Article>, Repo.RepoListener {
         mView?.openSeparateNews(item)
     }
 
+    var currentItem: Article? = null
     override fun onLongItemClicked(item: Article): Boolean {
         mView?.showMoreDetails(item)
+        currentItem = item
         return true
     }
 

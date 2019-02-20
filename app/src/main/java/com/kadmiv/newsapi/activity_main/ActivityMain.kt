@@ -7,7 +7,6 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
@@ -46,6 +45,7 @@ interface IView {
 
 const val OLD_NEWS_LIST = "OLD_NEWS_LIST"
 const val OLD_NEWS_MANAGER = "OLD_NEWS_MANAGER"
+const val CURRENT_ITEM = "CURRENT_ITEM"
 
 class MainActivity : AppCompatActivity(), IView {
 
@@ -64,17 +64,13 @@ class MainActivity : AppCompatActivity(), IView {
         if (savedInstanceState != null) {
             mPresenter?.oldList = savedInstanceState.getParcelableArrayList<Article>(OLD_NEWS_LIST)
             managerState = savedInstanceState.getParcelable(OLD_NEWS_MANAGER)
+            mPresenter?.currentItem = savedInstanceState.getParcelable(CURRENT_ITEM)
         }
     }
 
     override fun onStart() {
         super.onStart()
         mPresenter?.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mPresenter?.onStop()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -106,7 +102,17 @@ class MainActivity : AppCompatActivity(), IView {
 
         var manager = newsRecycler.layoutManager
         outState?.putParcelable(OLD_NEWS_MANAGER, manager?.onSaveInstanceState())
+
+        if (mPresenter?.currentItem != null)
+            outState?.putParcelable(CURRENT_ITEM, mPresenter?.currentItem)
+
+        closeDialog()
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mPresenter?.onStop()
     }
 
     override fun onDestroy() {
