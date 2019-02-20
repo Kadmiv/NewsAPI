@@ -176,9 +176,9 @@ class MainActivity : AppCompatActivity(), IView {
     }
 
     override fun closeDialog() {
+        mPresenter?.currentItem = null
         if (dialog != null && dialog!!.isShowing()) {
             dialog!!.dismiss()
-            mPresenter?.currentItem = null
         }
     }
 
