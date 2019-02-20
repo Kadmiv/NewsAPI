@@ -11,7 +11,6 @@ class Presenter(var mView: IView?) : ItemListener<Article>, Repo.RepoListener {
 
     var oldList: ArrayList<Article>? = null
 
-
     fun onStart() {
         mRepo?.listener = this
         if (oldList == null) {

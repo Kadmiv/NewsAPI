@@ -176,8 +176,10 @@ class MainActivity : AppCompatActivity(), IView {
     }
 
     override fun closeDialog() {
-        if (dialog != null && dialog!!.isShowing())
+        if (dialog != null && dialog!!.isShowing()) {
             dialog!!.dismiss()
+            mPresenter?.currentItem = null
+        }
     }
 
     override fun showTopNews(data: List<Article>) {
